@@ -19,7 +19,16 @@ while input_val != "exit":
     response = requests.get(url,headers=headers)
     
     if response.status_code == 200:
-        print(response.json())
+        
+        
+        respJson = response.json()
+        
+        location = f"{respJson["location"]["name"]},{respJson["location"]["region"]}"
+        temp = f"{respJson["current"]["temp_c"]} celsius"
+        condition = respJson["current"]["condition"]["text"]
+        print(
+            f"temperature is {temp} at {location} and it seems {condition}"
+        )
     elif 400:
         print("invalid location")
     else:
